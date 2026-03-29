@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Someone Special ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Glass Card */
+.container {
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 40px;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 10%;
+}
+
+/* Slides */
+.slide {
+    display: none;
+    animation: fade 1s ease;
+}
+.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+h1 {
+    font-size: 2.2em;
+}
+p {
+    font-size: 1.2em;
+}
+
+/* Buttons */
+button {
+    padding: 12px 25px;
+    margin: 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.next {
+    background: white;
+    color: black;
+}
+
+.yes {
+    background: #00c853;
+    color: white;
+}
+
+.no {
+    background: #d50000;
+    color: white;
+    position: absolute;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+    <source src="audio/bg.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<button id="playMusicBtn" class="next" style="margin: 20px auto; display: block;">Play Music 🎵</button>
+
+<!-- Floating Hearts -->
+<script>
+for(let i=0; i<25; i++){
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (15 + Math.random()*25) + "px";
+    heart.style.animationDuration = (4 + Math.random()*5) + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="container">
+
+<div class="slide active">
+    <h1>Hey... I Want To Tell You Something 💭</h1>
+    <p>Today, I just want to be completely honest with you ❤️</p>
+    <button class="next" onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<div class="slide">
+    <h1>When It All Started... ✨</h1>
+    <p>I don’t know when… but you slowly became important to me 💕</p>
+    <button class="next" onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<div class="slide">
+    <h1>What I Feel... 💖</h1>
+    <p>You bring peace to my life…  
+    and honestly… I think I’m in love with you ❤️</p>
+    <button class="next" onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<div class="slide">
+    <h1>From My Heart... 🌹</h1>
+    <p>You are not just a friend…  
+    you are someone very special to me ❤️</p>
+    <button class="next" onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<div class="slide">
+    <h1>Do You Feel The Same? ❓</h1>
+    <p>I really want to know your answer 💭</p>
+    <button class="yes" onclick="yesClick()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 💔</button>
+</div>
+
+</div>
+
+<script>
+let currentSlide = 0;
+let slides = document.getElementsByClassName("slide");
+
+function nextSlide() {
+    slides[currentSlide].classList.remove("active");
+    currentSlide++;
+    slides[currentSlide].classList.add("active");
+}
+
+// YES → WhatsApp
+function yesClick() {
+    let number = "919801686031"; // <-- अपना number डालना
+    let message = "I feel the same ❤️";
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`);
+}
+
+// NO button moves 😏
+let noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", function(){
+    noBtn.style.top = Math.random()*80 + "vh";
+    noBtn.style.left = Math.random()*80 + "vw";
+});
+
+// Music play button for browser compatibility
+let bgMusic = document.getElementById("bgMusic");
+let playMusicBtn = document.getElementById("playMusicBtn");
+playMusicBtn.addEventListener("click", function() {
+    bgMusic.play().then(() => {
+        playMusicBtn.textContent = "Music Playing 🎵";
+        playMusicBtn.disabled = true;
+    }).catch((error) => {
+        console.log("Audio play failed:", error);
+        playMusicBtn.textContent = "Tap to play music";
+    });
+});
+</script>
+
+</body>
+</html>
